@@ -14,3 +14,7 @@ func (api *API) systemCheck(w http.ResponseWriter, r *http.Request) {
 	}
 	res.ServeJSON(w)
 }
+
+func (api *API) systemPanic(w http.ResponseWriter, r *http.Request) {
+	panic("System Panic!")
+}
