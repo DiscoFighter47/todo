@@ -3,7 +3,10 @@ package api
 import (
 	"net/http"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
 )
 
 // API ...
@@ -13,7 +16,10 @@ type API struct {
 
 // NewAPI ...
 func NewAPI() *API {
-	api := &API{}
+	api := &API{
+		handler: chi.NewRouter(),
+	}
+	api.registerMiddleware()
 	api.registerHandler()
 	return api
 }
@@ -23,8 +29,12 @@ func (api *API) Handler() http.Handler {
 	return api.handler
 }
 
+func (api *API) registerMiddleware() {
+	logger := logrus.New()
+	api.handler.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{Logger: logger}))
+}
+
 func (api *API) registerHandler() {
-	api.handler = chi.NewRouter()
 	api.handler.Group(func(r chi.Router) {
 		r.Mount("/system", api.systemHandlers())
 	})
