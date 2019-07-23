@@ -6,6 +6,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/kinbiko/jsonassert"
 )
 
 func TestSystemCheck(t *testing.T) {
@@ -14,5 +16,5 @@ func TestSystemCheck(t *testing.T) {
 	res := httptest.NewRecorder()
 	api.systemCheck(res, req)
 	assert.Equal(t, http.StatusOK, res.Code)
-	assert.Equal(t, "Hello Universe!", res.Body.String())
+	jsonassert.New(t).Assertf(res.Body.String(), `{"Code":200,"data":{"message":"Hello Universe!"}}`)
 }
