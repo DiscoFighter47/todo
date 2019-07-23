@@ -34,15 +34,12 @@ jobs:
 
 workflows:
   version: 2
-  test_master:
+  test_build_master:
     jobs:
       - test-backend:
           filters:
             branches:
               only: master
-
-  build_master:
-    jobs:
       - build-backend:
           requires:
             - test-backend
