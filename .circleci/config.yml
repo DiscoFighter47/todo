@@ -4,13 +4,26 @@ executors:
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
+  test-backend:
+    docker:
+      - image: circleci/golang:1.9
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: test backend
+          command: |
+            cd backend
+            go get -v -t -d ./...
+            go test -cover -v ./...
+
   build-backend:
     executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: build docker image
+          name: build backend docker image
           environment:
             IMAGE: todo-backend
           command: |
@@ -21,9 +34,18 @@ jobs:
 
 workflows:
   version: 2
+  test_master:
+    jobs:
+      - test-backend:
+          filters:
+            branches:
+              only: master
+
   build_master:
     jobs:
       - build-backend:
+          requires:
+            - test-backend
           filters:
             branches:
               only: master
