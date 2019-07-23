@@ -6,8 +6,7 @@ WORKDIR /go/src/github.com/DiscoFighter47/todo/backend
 COPY . .
 
 # fetch dependencies
-RUN go get -u github.com/golang/dep/cmd/dep
-RUN dep init -v
+RUN go get -v -t -d ./...
 
 # build the binary
 RUN CGO_ENABLED=0 GOOS=linux GOARC=amd64 go build -a -installsuffix cgo -o binary .
