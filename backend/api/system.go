@@ -1,6 +1,7 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 
 	gson "github.com/DiscoFighter47/gSON"
@@ -16,5 +17,5 @@ func (api *API) systemCheck(w http.ResponseWriter, r *http.Request) {
 }
 
 func (api *API) systemPanic(w http.ResponseWriter, r *http.Request) {
-	panic("System Panic!")
+	panic(gson.NewAPIerror("System Panic!", http.StatusInternalServerError, errors.New("system panic")))
 }
