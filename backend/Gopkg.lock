@@ -3,11 +3,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:6405d3244a134bdb6573379b25363862c307cf02bfbb3fa7218d2d36a10a5e8c"
+  digest = "1:a8c59c58a69893cd4080f30071af762e029710ca416c7b49d309dbc19731c9d4"
   name = "github.com/DiscoFighter47/gSON"
   packages = ["."]
   pruneopts = "UT"
-  revision = "83efcd7dcda8c65772976dc9ca165892ab7ce279"
+  revision = "6215f519929ea3cc3c2f9a68d3f91b64f2977b28"
 
 [[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"

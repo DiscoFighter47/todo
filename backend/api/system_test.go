@@ -14,7 +14,7 @@ func TestSystemCheck(t *testing.T) {
 	res := httptest.NewRecorder()
 	api.systemCheck(res, nil)
 	assert.Equal(t, http.StatusOK, res.Code)
-	jsonassert.New(t).Assertf(res.Body.String(), `{"Code":200,"data":{"message":"Hello Universe!"}}`)
+	jsonassert.New(t).Assertf(res.Body.String(), `{"data":{"message":"Hello Universe!"}}`)
 }
 
 func TestSystemPanic(t *testing.T) {
