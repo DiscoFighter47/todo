@@ -1,9 +1,11 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-	"time"
+
+	gconfig "github.com/DiscoFighter47/gConfig"
 
 	graceful "gopkg.in/tylerb/graceful.v1"
 
@@ -12,13 +14,15 @@ import (
 
 // Server ...
 type Server struct {
-	api *api.API
+	api    *api.API
+	config *gconfig.AppCfg
 }
 
 // NewServer ...
-func NewServer(api *api.API) *Server {
+func NewServer(api *api.API, config *gconfig.AppCfg) *Server {
 	return &Server{
-		api: api,
+		api:    api,
+		config: config,
 	}
 }
 
@@ -27,16 +31,16 @@ func (svr *Server) Serve() {
 	log.Println("starting server...")
 
 	server := &graceful.Server{
-		Timeout: 15 * time.Second,
+		Timeout: svr.config.GraceTimeout,
 		Server: &http.Server{
-			ReadTimeout:  15 * time.Second,
-			WriteTimeout: 15 * time.Second,
-			IdleTimeout:  15 * time.Second,
-			Addr:         ":8080",
+			ReadTimeout:  svr.config.ReadTimeout,
+			WriteTimeout: svr.config.WriteTimeout,
+			IdleTimeout:  svr.config.IdelTimeout,
+			Addr:         fmt.Sprintf(":%d", svr.config.Port),
 			Handler:      svr.api.Handler(),
 		},
 	}
 
-	log.Println("server listening on port :8080")
+	log.Println("server listening on port", svr.config.Port)
 	log.Fatal(server.ListenAndServe())
 }
