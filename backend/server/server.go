@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	gconfig "github.com/DiscoFighter47/gConfig"
-
 	graceful "gopkg.in/tylerb/graceful.v1"
 
 	"github.com/DiscoFighter47/todo/backend/api"
@@ -28,7 +27,7 @@ func NewServer(api *api.API, config *gconfig.AppCfg) *Server {
 
 // Serve ...
 func (svr *Server) Serve() {
-	log.Println("starting server...")
+	log.Println("Starting server...")
 
 	server := &graceful.Server{
 		Timeout: svr.config.GraceTimeout,
@@ -41,6 +40,6 @@ func (svr *Server) Serve() {
 		},
 	}
 
-	log.Println("server listening on port", svr.config.Port)
+	log.Println("Server listening on port", svr.config.Port)
 	log.Fatal(server.ListenAndServe())
 }

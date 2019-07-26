@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	gson "github.com/DiscoFighter47/gSON"
+	"github.com/DiscoFighter47/todo/backend/data"
 	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
@@ -13,12 +14,14 @@ import (
 // API ...
 type API struct {
 	handler chi.Router
+	store   data.Datastore
 }
 
 // NewAPI ...
-func NewAPI() *API {
+func NewAPI(store data.Datastore) *API {
 	api := &API{
 		handler: chi.NewRouter(),
+		store:   store,
 	}
 	api.registerMiddleware()
 	api.registerHandler()
@@ -38,15 +41,24 @@ func (api *API) registerMiddleware() {
 
 func (api *API) registerHandler() {
 	api.handler.Group(func(r chi.Router) {
-		r.Mount("/system", api.systemHandlers())
+		r.Mount("/system", api.systemHandler())
+		r.Mount("/auth", api.authHandler())
 	})
 }
 
-func (api *API) systemHandlers() chi.Router {
+func (api *API) systemHandler() chi.Router {
 	r := chi.NewRouter()
 	r.Group(func(r chi.Router) {
 		r.Get("/check", api.systemCheck)
 		r.Get("/panic", api.systemPanic)
+	})
+	return r
+}
+
+func (api *API) authHandler() chi.Router {
+	r := chi.NewRouter()
+	r.Group(func(r chi.Router) {
+		r.Post("/signup", api.authSignUp)
 	})
 	return r
 }

@@ -10,7 +10,7 @@ import (
 )
 
 func TestSystemCheck(t *testing.T) {
-	api := NewAPI()
+	api := NewAPI(nil)
 	res := httptest.NewRecorder()
 	api.systemCheck(res, nil)
 	assert.Equal(t, http.StatusOK, res.Code)
@@ -18,6 +18,6 @@ func TestSystemCheck(t *testing.T) {
 }
 
 func TestSystemPanic(t *testing.T) {
-	api := NewAPI()
+	api := NewAPI(nil)
 	assert.Panics(t, func() { api.systemPanic(nil, nil) }, "system should panic")
 }
