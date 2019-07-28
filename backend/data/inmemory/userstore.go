@@ -1,8 +1,7 @@
 package inmemory
 
 import (
-	"errors"
-
+	"github.com/DiscoFighter47/todo/backend/data"
 	"github.com/DiscoFighter47/todo/backend/model"
 )
 
@@ -21,7 +20,7 @@ func NewUserStore() *UserStore {
 // AddUser ...
 func (store *UserStore) AddUser(user *model.User) error {
 	if _, ok := store.repo[user.ID]; ok {
-		return errors.New("user already exists")
+		return data.ErrUserAlreadyExists
 	}
 	store.repo[user.ID] = user
 	return nil
@@ -32,5 +31,5 @@ func (store *UserStore) GetUser(id string) (*model.User, error) {
 	if user, found := store.repo[id]; found {
 		return user, nil
 	}
-	return nil, errors.New("user not found")
+	return nil, data.ErrUserNotFound
 }

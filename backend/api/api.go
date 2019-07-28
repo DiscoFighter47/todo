@@ -37,6 +37,7 @@ func (api *API) registerMiddleware() {
 	logger := logrus.New()
 	api.handler.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{Logger: logger}))
 	api.handler.Use(gson.Recoverer)
+	api.handler.Use(gson.ReqBodyLogger)
 }
 
 func (api *API) registerHandler() {
