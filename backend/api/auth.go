@@ -47,8 +47,8 @@ func (api *API) authSignUp(w http.ResponseWriter, r *http.Request) {
 		panic(gson.NewAPIerror("Unable To Add User", http.StatusBadRequest, err, body.ID))
 	}
 
-	res := gson.Response{
-		Data: body,
-	}
-	res.ServeJSON(w)
+	gson.ServeData(w, gson.Object{
+		"id":   body.ID,
+		"name": body.Name,
+	})
 }

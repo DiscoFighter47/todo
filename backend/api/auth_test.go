@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -21,7 +20,7 @@ func TestAuthSignUp(t *testing.T) {
 		res := httptest.NewRecorder()
 		api.authSignUp(res, req)
 		assert.Equal(t, res.Code, http.StatusOK)
-		assert.Equal(t, `{"data":{"id":"DiscoFighter47","name":"Zahid Al Tair","password":"password"}}`, strings.Replace(res.Body.String(), "\n", "", -1))
+		assert.JSONEq(t, `{"data":{"id":"DiscoFighter47","name":"Zahid Al Tair"}}`, res.Body.String())
 	})
 
 	t.Run("sign up duplicate", func(t *testing.T) {
