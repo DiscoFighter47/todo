@@ -61,6 +61,7 @@ func (api *API) authHandler() chi.Router {
 	r := chi.NewRouter()
 	r.Group(func(r chi.Router) {
 		r.Post("/signup", api.authSignUp)
+		r.Post("/signin", api.authSignIn)
 	})
 	return r
 }

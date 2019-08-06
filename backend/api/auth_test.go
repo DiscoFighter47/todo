@@ -6,9 +6,11 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/kinbiko/jsonassert"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/DiscoFighter47/todo/backend/data/inmemory"
+	"github.com/DiscoFighter47/todo/backend/model"
 )
 
 func TestAuthSignUp(t *testing.T) {
@@ -42,5 +44,31 @@ func TestAuthSignUp(t *testing.T) {
 		req := httptest.NewRequest("POST", "/auth/signup", bytes.NewReader([]byte(body)))
 		res := httptest.NewRecorder()
 		assert.Panics(t, func() { api.authSignUp(res, req) })
+	})
+}
+
+func TestAuthSignIn(t *testing.T) {
+	store := inmemory.NewDatastore()
+	store.AddUser(&model.User{
+		ID:       "DiscoFighter47",
+		Name:     "Zahid Al tair",
+		Password: "password",
+	})
+	api := NewAPI(store)
+
+	t.Run("sign in", func(t *testing.T) {
+		body := `{"id": "DiscoFighter47","password": "password"}`
+		req := httptest.NewRequest("POST", "/auth/signin", bytes.NewReader([]byte(body)))
+		res := httptest.NewRecorder()
+		api.authSignIn(res, req)
+		assert.Equal(t, res.Code, http.StatusOK)
+		jsonassert.New(t).Assertf(res.Body.String(), `{"data":{"id":"DiscoFighter47","token":"<<PRESENCE>>"}}`)
+	})
+
+	t.Run("sign in", func(t *testing.T) {
+		body := `{"id": "DiscoFighter47","password": "pass"}`
+		req := httptest.NewRequest("POST", "/auth/signin", bytes.NewReader([]byte(body)))
+		res := httptest.NewRecorder()
+		assert.Panics(t, func() { api.authSignIn(res, req) })
 	})
 }

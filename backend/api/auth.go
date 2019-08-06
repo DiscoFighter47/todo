@@ -1,6 +1,7 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 
 	gson "github.com/DiscoFighter47/gSON"
@@ -50,5 +51,47 @@ func (api *API) authSignUp(w http.ResponseWriter, r *http.Request) {
 	gson.ServeData(w, gson.Object{
 		"id":   body.ID,
 		"name": body.Name,
+	})
+}
+
+type authSignInBody struct {
+	ID       string `json:"id"`
+	Password string `json:"password"`
+}
+
+func (body *authSignInBody) validate() gson.ValidationError {
+	errV := gson.ValidationError{}
+	if body.ID == "" {
+		errV.Add("id", "required")
+	}
+	if body.Password == "" {
+		errV.Add("password", "required")
+	}
+	if len(errV) > 0 {
+		return errV
+	}
+	return nil
+}
+
+func (api *API) authSignIn(w http.ResponseWriter, r *http.Request) {
+	body := &authSignInBody{}
+	if err := gson.ParseBody(r, body); err != nil {
+		panic(gson.NewAPIerror("Unable To Parse Body", http.StatusUnprocessableEntity, err))
+	}
+	if err := body.validate(); err != nil {
+		panic(gson.NewAPIerror("Invalid Request Body", http.StatusBadRequest, err))
+	}
+
+	usr, err := api.store.GetUser(body.ID)
+	if err != nil {
+		panic(gson.NewAPIerror("Unable To Find User", http.StatusBadRequest, err, body.ID))
+	}
+	if usr.Password != body.Password {
+		panic(gson.NewAPIerror("Incorrect Password", http.StatusBadRequest, errors.New("password dosen't match"), body.ID))
+	}
+
+	gson.ServeData(w, gson.Object{
+		"id":    body.ID,
+		"token": "token",
 	})
 }
