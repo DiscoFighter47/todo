@@ -25,3 +25,10 @@ func TestSystemPanic(t *testing.T) {
 		assert.Panics(t, func() { api.systemPanic(nil, nil) })
 	})
 }
+
+func TestSystemError(t *testing.T) {
+	api := NewAPI(nil)
+	t.Run("system error", func(t *testing.T) {
+		assert.Panics(t, func() { api.systemError(nil, nil) })
+	})
+}
