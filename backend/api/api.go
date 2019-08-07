@@ -5,7 +5,6 @@ import (
 
 	gson "github.com/DiscoFighter47/gSON"
 	"github.com/DiscoFighter47/todo/backend/data"
-	"github.com/sirupsen/logrus"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -34,8 +33,7 @@ func (api *API) Handler() http.Handler {
 }
 
 func (api *API) registerMiddleware() {
-	logger := logrus.New()
-	api.handler.Use(middleware.RequestLogger(&middleware.DefaultLogFormatter{Logger: logger}))
+	api.handler.Use(middleware.Logger)
 	api.handler.Use(gson.Recoverer)
 	api.handler.Use(gson.ReqBodyLogger)
 }
