@@ -21,3 +21,9 @@ func (api *API) systemError(w http.ResponseWriter, r *http.Request) {
 	a, b := 1, 0
 	_ = a / b
 }
+
+func (api *API) systemSecret(w http.ResponseWriter, r *http.Request) {
+	gson.ServeData(w, gson.Object{
+		"message": "Hello Secret Universe! Welcome " + r.Header.Get("subject"),
+	})
+}

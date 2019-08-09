@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
+
+	gauth "github.com/DiscoFighter47/gAuth"
 
 	"github.com/kinbiko/jsonassert"
 	"github.com/stretchr/testify/assert"
@@ -14,7 +17,7 @@ import (
 )
 
 func TestAuthSignUp(t *testing.T) {
-	api := NewAPI(inmemory.NewDatastore())
+	api := NewAPI(inmemory.NewDatastore(), gauth.NewAuth("secret", 5*time.Second))
 
 	t.Run("sign up", func(t *testing.T) {
 		body := `{"id": "DiscoFighter47","name": "Zahid Al Tair","password": "password"}`
@@ -54,7 +57,7 @@ func TestAuthSignIn(t *testing.T) {
 		Name:     "Zahid Al tair",
 		Password: "password",
 	})
-	api := NewAPI(store)
+	api := NewAPI(store, gauth.NewAuth("secret", 5*time.Second))
 
 	t.Run("sign in", func(t *testing.T) {
 		body := `{"id": "DiscoFighter47","password": "password"}`

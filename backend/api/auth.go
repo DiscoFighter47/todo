@@ -90,8 +90,13 @@ func (api *API) authSignIn(w http.ResponseWriter, r *http.Request) {
 		panic(gson.NewAPIerror("Incorrect Password", http.StatusBadRequest, errors.New("password dosen't match"), body.ID))
 	}
 
+	token, err := api.auth.GenerateToken(body.ID)
+	if err != nil {
+		panic(gson.NewAPIerror("Unable To Generate Token", http.StatusInternalServerError, err))
+	}
+
 	gson.ServeData(w, gson.Object{
 		"id":    body.ID,
-		"token": "token",
+		"token": token,
 	})
 }
