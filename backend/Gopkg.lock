@@ -11,11 +11,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:bb67d9b3bafeb2fc2c5369c6c479606d0354aa1119adce830d87196c08a4c4b9"
+  digest = "1:1e3179f4026a87f2b0bda65966b31851612808963a4fcff886034f8f73fe015a"
   name = "github.com/DiscoFighter47/gConfig"
   packages = ["."]
   pruneopts = "UT"
-  revision = "06f3b2417675e8a053af843a3d998637ecc4c401"
+  revision = "6b9b07324f523153fc598cb31263a517b2c436c0"
 
 [[projects]]
   branch = "master"

@@ -1,6 +1,10 @@
 app:
   port: 8080
-  read_timeout: 15
-  write_timeout: 15
-  idle_timeout: 15
-  grace_timeout: 15
+  read_timeout: 15 #second
+  write_timeout: 15 #second
+  idle_timeout: 15 #second
+  grace_timeout: 15 #second
+
+auth:
+  secret: "secret"
+  token_expire_timeout: 1 #minute

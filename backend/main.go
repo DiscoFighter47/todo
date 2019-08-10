@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	gauth "github.com/DiscoFighter47/gAuth"
 	gconfig "github.com/DiscoFighter47/gConfig"
 	"github.com/DiscoFighter47/todo/backend/api"
@@ -11,5 +9,5 @@ import (
 )
 
 func main() {
-	server.NewServer(api.NewAPI(inmemory.NewDatastore(), gauth.NewAuth("secret", 1*time.Minute)), gconfig.App()).Serve()
+	server.NewServer(api.NewAPI(inmemory.NewDatastore(), gauth.NewAuth(gconfig.Auth().Secret, gconfig.Auth().TokenExpireTimeout)), gconfig.App()).Serve()
 }
