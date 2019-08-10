@@ -3,11 +3,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:dc3c9bc7ac5317957b0324c4930962dd3734ccdafe1973fb3deb1edf5977e1c4"
+  digest = "1:2ac3241a9abac4eaa2b95fe751a56bfa047a6e8d1bd4a6590e83d3c5dcbdd0ef"
   name = "github.com/DiscoFighter47/gAuth"
   packages = ["."]
   pruneopts = "UT"
-  revision = "68e7f5218cd12821f1391c5c9d03bc1953104e28"
+  revision = "bd4173a010c9be975672c3c39a97b7b504cc0ab1"
 
 [[projects]]
   branch = "master"

@@ -11,5 +11,5 @@ import (
 )
 
 func main() {
-	server.NewServer(api.NewAPI(inmemory.NewDatastore(), gauth.NewAuth("secret", 5*time.Minute)), gconfig.App()).Serve()
+	server.NewServer(api.NewAPI(inmemory.NewDatastore(), gauth.NewAuth("secret", 1*time.Minute)), gconfig.App()).Serve()
 }

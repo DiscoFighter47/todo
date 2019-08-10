@@ -4,7 +4,7 @@ import "errors"
 
 var (
 	// ErrUserAlreadyExists ...
-	ErrUserAlreadyExists = errors.New("user already exists")
+	ErrUserAlreadyExists = errors.New("User already exists")
 	// ErrUserNotFound ...
-	ErrUserNotFound = errors.New("user not found")
+	ErrUserNotFound = errors.New("User not found")
 )

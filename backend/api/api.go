@@ -54,7 +54,6 @@ func (api *API) systemHandler() chi.Router {
 		r.Get("/check", api.systemCheck)
 		r.Get("/panic", api.systemPanic)
 		r.Get("/err", api.systemError)
-		r.With(api.auth.Gatekeeper).Get("/secret", api.systemSecret)
 	})
 	return r
 }
@@ -64,6 +63,7 @@ func (api *API) authHandler() chi.Router {
 	r.Group(func(r chi.Router) {
 		r.Post("/signup", api.authSignUp)
 		r.Post("/signin", api.authSignIn)
+		r.With(api.auth.Gatekeeper).Get("/check", api.authCheck)
 	})
 	return r
 }

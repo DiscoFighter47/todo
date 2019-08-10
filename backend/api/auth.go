@@ -45,7 +45,7 @@ func (api *API) authSignUp(w http.ResponseWriter, r *http.Request) {
 		Name:     body.Name,
 		Password: body.Password,
 	}); err != nil {
-		panic(gson.NewAPIerror("Unable To Add User", http.StatusBadRequest, err, body.ID))
+		panic(gson.NewAPIerror("Unable To Add User", http.StatusInternalServerError, err, body.ID))
 	}
 
 	gson.ServeData(w, gson.Object{
@@ -98,5 +98,11 @@ func (api *API) authSignIn(w http.ResponseWriter, r *http.Request) {
 	gson.ServeData(w, gson.Object{
 		"id":    body.ID,
 		"token": token,
+	})
+}
+
+func (api *API) authCheck(w http.ResponseWriter, r *http.Request) {
+	gson.ServeData(w, gson.Object{
+		"message": "Hello Secret Universe! Welcome " + r.Header.Get("subject"),
 	})
 }
