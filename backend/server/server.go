@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	gconfig "github.com/DiscoFighter47/gConfig"
+	config "github.com/DiscoFighter47/gConfig"
 	graceful "gopkg.in/tylerb/graceful.v1"
 
 	"github.com/DiscoFighter47/todo/backend/api"
@@ -14,11 +14,11 @@ import (
 // Server ...
 type Server struct {
 	api    *api.API
-	config *gconfig.AppCfg
+	config *config.AppCfg
 }
 
 // NewServer ...
-func NewServer(api *api.API, config *gconfig.AppCfg) *Server {
+func NewServer(api *api.API, config *config.AppCfg) *Server {
 	return &Server{
 		api:    api,
 		config: config,

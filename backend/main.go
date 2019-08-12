@@ -1,13 +1,20 @@
 package main
 
 import (
-	gauth "github.com/DiscoFighter47/gAuth"
-	gconfig "github.com/DiscoFighter47/gConfig"
+	auth "github.com/DiscoFighter47/gAuth"
+	config "github.com/DiscoFighter47/gConfig"
 	"github.com/DiscoFighter47/todo/backend/api"
 	"github.com/DiscoFighter47/todo/backend/data/inmemory"
 	"github.com/DiscoFighter47/todo/backend/server"
 )
 
 func main() {
-	server.NewServer(api.NewAPI(inmemory.NewDatastore(), gauth.NewAuth(gconfig.Auth().Secret, gconfig.Auth().TokenExpireTimeout)), gconfig.App()).Serve()
+	appCfg := config.App()
+	authCfg := config.Auth()
+
+	store := inmemory.NewDatastore()
+	auth := auth.NewAuth(authCfg.Secret, authCfg.TokenExpireTimeout)
+	api := api.NewAPI(store, auth)
+
+	server.NewServer(api, appCfg).Serve()
 }

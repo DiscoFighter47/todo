@@ -3,7 +3,7 @@ package api
 import (
 	"net/http"
 
-	gauth "github.com/DiscoFighter47/gAuth"
+	auth "github.com/DiscoFighter47/gAuth"
 	gson "github.com/DiscoFighter47/gSON"
 	"github.com/DiscoFighter47/todo/backend/data"
 
@@ -15,11 +15,11 @@ import (
 type API struct {
 	handler chi.Router
 	store   data.Datastore
-	auth    *gauth.Auth
+	auth    *auth.Auth
 }
 
 // NewAPI ...
-func NewAPI(store data.Datastore, auth *gauth.Auth) *API {
+func NewAPI(store data.Datastore, auth *auth.Auth) *API {
 	api := &API{
 		handler: chi.NewRouter(),
 		store:   store,

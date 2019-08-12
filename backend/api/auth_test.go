@@ -7,11 +7,10 @@ import (
 	"testing"
 	"time"
 
-	gauth "github.com/DiscoFighter47/gAuth"
-
 	"github.com/kinbiko/jsonassert"
 	"github.com/stretchr/testify/assert"
 
+	auth "github.com/DiscoFighter47/gAuth"
 	"github.com/DiscoFighter47/todo/backend/data/inmemory"
 	"github.com/DiscoFighter47/todo/backend/model"
 )
@@ -69,7 +68,7 @@ func TestAuthSignIn(t *testing.T) {
 		Name:     "Zahid Al tair",
 		Password: "password",
 	})
-	api := NewAPI(store, gauth.NewAuth("secret", 5*time.Second))
+	api := NewAPI(store, auth.NewAuth("secret", 1*time.Second))
 
 	testData := []struct {
 		des  string
@@ -121,7 +120,7 @@ func TestAuthSignIn(t *testing.T) {
 }
 
 func TestAuthCheck(t *testing.T) {
-	auth := gauth.NewAuth("secret", 1*time.Second)
+	auth := auth.NewAuth("secret", 1*time.Second)
 	token, _ := auth.GenerateToken("user1")
 	api := NewAPI(nil, auth)
 

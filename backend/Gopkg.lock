@@ -3,19 +3,19 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:2ac3241a9abac4eaa2b95fe751a56bfa047a6e8d1bd4a6590e83d3c5dcbdd0ef"
+  digest = "1:08e3db5653715b9ccf448048c2b5273f5ee63de205296b6fb9c14f912631e572"
   name = "github.com/DiscoFighter47/gAuth"
   packages = ["."]
   pruneopts = "UT"
-  revision = "bd4173a010c9be975672c3c39a97b7b504cc0ab1"
+  revision = "37570b3b6bd15526e4afac5c83cb8b21980a34e7"
 
 [[projects]]
   branch = "master"
-  digest = "1:1e3179f4026a87f2b0bda65966b31851612808963a4fcff886034f8f73fe015a"
+  digest = "1:f0baa817e5f0d34012ae845040231753239e271b076ce8fd4c6fd41f39f3b47f"
   name = "github.com/DiscoFighter47/gConfig"
   packages = ["."]
   pruneopts = "UT"
-  revision = "6b9b07324f523153fc598cb31263a517b2c436c0"
+  revision = "6ddff3bda48afa7602955084226775d48900e89e"
 
 [[projects]]
   branch = "master"
@@ -267,11 +267,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:fdfd985fe7956d77128572032636b5c1b7b58a81acd7089e96923e2f9539c573"
+  digest = "1:8d30f87f59931cdd4d45e450185216a34eba66c1f1f68a314ac0fa49d19f9826"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "51ab0e2deafac1f46c46ad59cf0921be2f180c3d"
+  revision = "9eafafc0a87e0fd0aeeba439a4573537970c44c7"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
