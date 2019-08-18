@@ -11,12 +11,13 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	auth "github.com/DiscoFighter47/gAuth"
-	"github.com/DiscoFighter47/todo/backend/data/inmemory"
+	cache "github.com/DiscoFighter47/todo/backend/cache/inmemory"
+	data "github.com/DiscoFighter47/todo/backend/data/inmemory"
 	"github.com/DiscoFighter47/todo/backend/model"
 )
 
 func TestAuthSignUp(t *testing.T) {
-	api := NewAPI(inmemory.NewDatastore(), nil)
+	api := NewAPI(data.NewDatastore(), nil, nil)
 
 	testData := []struct {
 		des  string
@@ -62,13 +63,13 @@ func TestAuthSignUp(t *testing.T) {
 }
 
 func TestAuthSignIn(t *testing.T) {
-	store := inmemory.NewDatastore()
+	store := data.NewDatastore()
 	store.AddUser(&model.User{
 		ID:       "DiscoFighter47",
 		Name:     "Zahid Al tair",
 		Password: "password",
 	})
-	api := NewAPI(store, auth.NewAuth("secret", 1*time.Second))
+	api := NewAPI(store, nil, auth.NewAuth("secret", 1*time.Second))
 
 	testData := []struct {
 		des  string
@@ -113,16 +114,45 @@ func TestAuthSignIn(t *testing.T) {
 			req := httptest.NewRequest("POST", "/auth/signin", bytes.NewReader([]byte(td.body)))
 			res := httptest.NewRecorder()
 			api.handler.ServeHTTP(res, req)
-			assert.Equal(t, td.code, td.code)
+			assert.Equal(t, td.code, res.Code)
 			jsonassert.New(t).Assertf(res.Body.String(), td.res)
 		})
 	}
 }
 
+func TestAuthsignOut(t *testing.T) {
+	auth := auth.NewAuth("secret", 1*time.Second)
+	token := auth.GenerateToken("user")
+	api := NewAPI(nil, nil, auth)
+
+	t.Run("sign out", func(t *testing.T) {
+		req := httptest.NewRequest("POST", "/auth/signout", nil)
+		req.Header.Set("Authorization", "Bearer "+token)
+		res := httptest.NewRecorder()
+		api.handler.ServeHTTP(res, req)
+		assert.Equal(t, http.StatusInternalServerError, res.Code)
+		jsonassert.New(t).Assertf(res.Body.String(), `{"error":{"title":"Unable To Invalidate Token","detail":"unsupported operation","tags":["user"]}}`)
+	})
+
+	cache := cache.NewCache()
+	auth.SetBlackListStore(cache)
+
+	t.Run("sign out", func(t *testing.T) {
+		req := httptest.NewRequest("POST", "/auth/signout", nil)
+		req.Header.Set("Authorization", "Bearer "+token)
+		res := httptest.NewRecorder()
+		api.handler.ServeHTTP(res, req)
+		assert.Equal(t, http.StatusOK, res.Code)
+		jsonassert.New(t).Assertf(res.Body.String(), `{"data":{"message":"Goodbye Secret Universe! See you user"}}`)
+		found, _ := cache.Contains(token)
+		assert.Equal(t, true, found)
+	})
+}
+
 func TestAuthCheck(t *testing.T) {
 	auth := auth.NewAuth("secret", 1*time.Second)
-	token, _ := auth.GenerateToken("user1")
-	api := NewAPI(nil, auth)
+	token := auth.GenerateToken("user")
+	api := NewAPI(nil, nil, auth)
 
 	testData := []struct {
 		des   string
@@ -134,7 +164,7 @@ func TestAuthCheck(t *testing.T) {
 			des:   "auth check",
 			token: "Bearer " + token,
 			code:  http.StatusOK,
-			res:   `{"data":{"message":"Hello Secret Universe! Welcome user1"}}`,
+			res:   `{"data":{"message":"Hello Secret Universe! Welcome user"}}`,
 		},
 		{
 			des:  "no token",

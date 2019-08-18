@@ -3,6 +3,8 @@ package api
 import (
 	"net/http"
 
+	"github.com/DiscoFighter47/todo/backend/cache"
+
 	auth "github.com/DiscoFighter47/gAuth"
 	gson "github.com/DiscoFighter47/gSON"
 	"github.com/DiscoFighter47/todo/backend/data"
@@ -15,14 +17,16 @@ import (
 type API struct {
 	handler chi.Router
 	store   data.Datastore
+	cache   cache.Cache
 	auth    *auth.Auth
 }
 
 // NewAPI ...
-func NewAPI(store data.Datastore, auth *auth.Auth) *API {
+func NewAPI(store data.Datastore, cache cache.Cache, auth *auth.Auth) *API {
 	api := &API{
 		handler: chi.NewRouter(),
 		store:   store,
+		cache:   cache,
 		auth:    auth,
 	}
 	api.registerMiddleware()
@@ -63,6 +67,7 @@ func (api *API) authHandler() chi.Router {
 	r.Group(func(r chi.Router) {
 		r.Post("/signup", api.authSignUp)
 		r.Post("/signin", api.authSignIn)
+		r.With(api.auth.Gatekeeper).Post("/signout", api.authSignOut)
 		r.With(api.auth.Gatekeeper).Get("/check", api.authCheck)
 	})
 	return r

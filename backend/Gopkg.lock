@@ -3,11 +3,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:08e3db5653715b9ccf448048c2b5273f5ee63de205296b6fb9c14f912631e572"
+  digest = "1:695ada2c9e11825efdf6a5a47d4b1c5e937e01d9955a519fb92b7ca953b8a418"
   name = "github.com/DiscoFighter47/gAuth"
   packages = ["."]
   pruneopts = "UT"
-  revision = "37570b3b6bd15526e4afac5c83cb8b21980a34e7"
+  revision = "bd5514a96db13ccd3f1f7ecde45980b02e2b0b98"
 
 [[projects]]
   branch = "master"
@@ -34,7 +34,7 @@
   revision = "eb2c6b5be1b66bab83016e0b05f01b8d5496ffbd"
 
 [[projects]]
-  digest = "1:53cbf1b46de4361416179ade70a96517fe6263301e65a7afa6afde8d92bab4c6"
+  digest = "1:54537629850cc25ec7396d1ac9dcf22dbc4a19a0918262bdfcda1c435eebc7ff"
   name = "github.com/coreos/etcd"
   packages = [
     "client",
@@ -44,8 +44,8 @@
     "version",
   ]
   pruneopts = "UT"
-  revision = "98d308426819d892e149fe45f6fd542464cb1f9d"
-  version = "v3.3.13"
+  revision = "5cf5d88a18aeaf31afd8a29f495bb4e70ee13997"
+  version = "v3.3.14"
 
 [[projects]]
   digest = "1:05ffeeed3f0f05520de0679f6aa3219ffee69cfd6d9fb6c194879d4c818ad670"
@@ -228,12 +228,12 @@
   version = "v1.4.0"
 
 [[projects]]
-  digest = "1:972c2427413d41a1e06ca4897e8528e5a1622894050e2f527b38ddf0f343f759"
+  digest = "1:8548c309c65a85933a625be5e7d52b6ac927ca30c56869fae58123b8a77a75e1"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
   pruneopts = "UT"
-  revision = "ffdc059bfe9ce6a4e144ba849dbedead332c6053"
-  version = "v1.3.0"
+  revision = "221dbe5ed46703ee255b1da0dec05086f5035f62"
+  version = "v1.4.0"
 
 [[projects]]
   branch = "master"
@@ -267,11 +267,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:8d30f87f59931cdd4d45e450185216a34eba66c1f1f68a314ac0fa49d19f9826"
+  digest = "1:47844666be86089349a441f5f0ece22f42a87a8cb8c9a31294c593f43209ad19"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "9eafafc0a87e0fd0aeeba439a4573537970c44c7"
+  revision = "fde4db37ae7ad8191b03d30d27f258b5291ae4e3"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"

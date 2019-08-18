@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 
+	auth "github.com/DiscoFighter47/gAuth"
 	gson "github.com/DiscoFighter47/gSON"
 	"github.com/DiscoFighter47/todo/backend/model"
 )
@@ -90,7 +91,7 @@ func (api *API) authSignIn(w http.ResponseWriter, r *http.Request) {
 		panic(gson.NewAPIerror("Incorrect Password", http.StatusBadRequest, errors.New("password dosen't match"), body.ID))
 	}
 
-	token, err := api.auth.GenerateToken(body.ID)
+	token := api.auth.GenerateToken(body.ID)
 	if err != nil {
 		panic(gson.NewAPIerror("Unable To Generate Token", http.StatusInternalServerError, err))
 	}
@@ -98,6 +99,16 @@ func (api *API) authSignIn(w http.ResponseWriter, r *http.Request) {
 	gson.ServeData(w, gson.Object{
 		"id":    body.ID,
 		"token": token,
+	})
+}
+
+func (api *API) authSignOut(w http.ResponseWriter, r *http.Request) {
+	token, _ := auth.ExtractBearerToken(r.Header.Get("Authorization"))
+	if err := api.auth.Invalidate(token); err != nil {
+		panic(gson.NewAPIerror("Unable To Invalidate Token", http.StatusInternalServerError, err, r.Header.Get("subject")))
+	}
+	gson.ServeData(w, gson.Object{
+		"message": "Goodbye Secret Universe! See you " + r.Header.Get("subject"),
 	})
 }
 

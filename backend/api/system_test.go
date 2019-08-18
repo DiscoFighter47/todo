@@ -9,7 +9,7 @@ import (
 )
 
 func TestSystemCheck(t *testing.T) {
-	api := NewAPI(nil, nil)
+	api := NewAPI(nil, nil, nil)
 	t.Run("system check", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/system/check", nil)
 		res := httptest.NewRecorder()
@@ -20,7 +20,7 @@ func TestSystemCheck(t *testing.T) {
 }
 
 func TestSystemPanic(t *testing.T) {
-	api := NewAPI(nil, nil)
+	api := NewAPI(nil, nil, nil)
 	t.Run("system panic", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/system/panic", nil)
 		res := httptest.NewRecorder()
@@ -31,7 +31,7 @@ func TestSystemPanic(t *testing.T) {
 }
 
 func TestSystemError(t *testing.T) {
-	api := NewAPI(nil, nil)
+	api := NewAPI(nil, nil, nil)
 	t.Run("system error", func(t *testing.T) {
 		req := httptest.NewRequest("GET", "/system/err", nil)
 		res := httptest.NewRecorder()
