@@ -41,8 +41,9 @@ func (api *API) Handler() http.Handler {
 
 func (api *API) registerMiddleware() {
 	api.handler.Use(middleware.Logger)
+	api.handler.Use(gson.RequestLogger)
+	api.handler.Use(gson.ResponseLogger)
 	api.handler.Use(gson.Recoverer)
-	api.handler.Use(gson.ReqBodyLogger)
 }
 
 func (api *API) registerHandler() {

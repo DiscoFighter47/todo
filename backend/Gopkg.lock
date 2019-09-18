@@ -19,11 +19,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b0680814db28212aea2d13ab0b9ec6cca040073e5e7fa6a0b2484881773e88ba"
+  digest = "1:9cfcc2618969591b20d4beeaf867bac5eb6b35e21fb7b2b27a57698242eac92a"
   name = "github.com/DiscoFighter47/gSON"
   packages = ["."]
   pruneopts = "UT"
-  revision = "58a01719535d051f41ce1a67d38312751c1f553a"
+  revision = "46c447429c0444b589b66e5affcc4efc4ca4c7b1"
 
 [[projects]]
   branch = "master"
@@ -34,18 +34,12 @@
   revision = "eb2c6b5be1b66bab83016e0b05f01b8d5496ffbd"
 
 [[projects]]
-  digest = "1:54537629850cc25ec7396d1ac9dcf22dbc4a19a0918262bdfcda1c435eebc7ff"
+  digest = "1:273c00c6bbaa532224accf6f4c25336756c0e9df918874bbbee429a750ee8b07"
   name = "github.com/coreos/etcd"
-  packages = [
-    "client",
-    "pkg/pathutil",
-    "pkg/srv",
-    "pkg/types",
-    "version",
-  ]
+  packages = ["client"]
   pruneopts = "UT"
-  revision = "5cf5d88a18aeaf31afd8a29f495bb4e70ee13997"
-  version = "v3.3.14"
+  revision = "a14579fbfb1a000439a40abf71862df51b0a2136"
+  version = "v3.4.1"
 
 [[projects]]
   digest = "1:05ffeeed3f0f05520de0679f6aa3219ffee69cfd6d9fb6c194879d4c818ad670"
@@ -209,12 +203,12 @@
   version = "v1.1.0"
 
 [[projects]]
-  digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"
+  digest = "1:cc33ef8c2b75f80e588a96f9a70324c0487a02323bd5b2c5d639dda973edc844"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "UT"
-  revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
-  version = "v1.0.3"
+  revision = "e8f29969b682c41a730f8f08b76033b120498464"
+  version = "v1.0.4"
 
 [[projects]]
   digest = "1:5d7e98ad29b0dc062d7cb720c4f8c85b521b64a508ffd6d82d5c288d682a2728"
@@ -250,6 +244,19 @@
   revision = "b2862e3d0a775f18c7cfe02273500ae307b61218"
 
 [[projects]]
+  digest = "1:2719dc3c368824604b3aefb2fae0c64ef8d3155e5de8dfcf185bf5c90de6d039"
+  name = "go.etcd.io/etcd"
+  packages = [
+    "pkg/pathutil",
+    "pkg/srv",
+    "pkg/types",
+    "version",
+  ]
+  pruneopts = "UT"
+  revision = "a14579fbfb1a000439a40abf71862df51b0a2136"
+  version = "v3.4.1"
+
+[[projects]]
   branch = "master"
   digest = "1:50804d40964a0c59170e827824e79bbf810cc10ae57603d8facce8a1f48f9a83"
   name = "golang.org/x/crypto"
@@ -263,15 +270,15 @@
     "openpgp/s2k",
   ]
   pruneopts = "UT"
-  revision = "4def268fd1a49955bfb3dda92fe3db4f924f2285"
+  revision = "227b76d455e791cb042b03e633e2f7fbcfdf74a5"
 
 [[projects]]
   branch = "master"
-  digest = "1:47844666be86089349a441f5f0ece22f42a87a8cb8c9a31294c593f43209ad19"
+  digest = "1:ec9d9815894f067c7878330735b9e4dfa6dc61234d2ba136b60a1436d6b5ea94"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "fde4db37ae7ad8191b03d30d27f258b5291ae4e3"
+  revision = "b4ddaad3f8a36719f2b8bc6486c14cc468ca2bb5"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
